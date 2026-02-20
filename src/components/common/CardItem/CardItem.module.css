@@ -1,0 +1,35 @@
+.card {
+	display: flex;
+	flex-direction: column;
+	background: rgba(127, 7, 153, 0.1);
+	color: var(--color-text);
+	border: .2rem solid var(--color-royal);
+	border-radius: var(--radius);
+	gap: var(--gap-small);
+	padding: var(--padding-small);
+	transition: background 0.2s, border-color 0.2s;
+}
+
+.card:hover {
+	border-color: var(--color-primary);
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--gap);
+}
+
+.code {
+	background: rgba(127, 7, 153, 0.3);
+	color: var(--color-primary);
+	padding: var(--padding-small);
+	border-radius: .4rem;
+}
+
+.type {
+	text-transform: capitalize;
+}
+
+

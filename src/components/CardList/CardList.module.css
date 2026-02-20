@@ -1,0 +1,31 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap);
+}
+
+.error {
+	color: var(--color-secondary);
+	text-align: center;
+}
+
+.count {
+	color: var(--color-primary);
+}
+
+.list {
+	display: grid;
+	grid-template-columns: 1fr;
+	list-style: none;
+	gap: var(--gap);
+
+	@media (min-width: 48em) {
+		grid-template-columns: minmax(0, 40rem);
+		justify-content: center;
+	}
+
+	@media (min-width: 64em) {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+

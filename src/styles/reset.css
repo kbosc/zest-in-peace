@@ -7,10 +7,12 @@
 }
 
 html {
+	font-size: 62.5%; /* 1rem = 10px */
 	scroll-behavior: smooth;
 }
 
 body {
 	font-family: inherit;
 	line-height: 1.5;
+	font-size: 1.6rem; /* sets 16px as the base size for text */
 }
