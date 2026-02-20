@@ -1,0 +1,10 @@
+:root {
+  --color-bg: #292e1e;
+  --color-primary: #AFBBF2;
+  --color-secondary: #F0B7B3;
+  --color-royal: #7F0799; /* Do not use as text, it is not accessible */
+  --color-text: #e8f5e9;
+
+  --radius: 8px;
+  --gap: 16px;
+}
