@@ -1,0 +1,4 @@
+:root {
+	--breakpoint-sm: 48em;   /* tablette */
+	--breakpoint-wd: 64em;   /* desktop */
+}

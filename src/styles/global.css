@@ -1,10 +1,16 @@
-@import './variables.css';
-@import './reset.css';
+@import "./variables.css";
+@import "./reset.css";
+@import "./utils/breakpoints.css";
+@import "./utils/screen-readers.css";
 
 body {
   background: var(--color-bg);
   color: var(--color-text);
   font-family: Helvetica, sans-serif;
   min-height: 100vh;
-	padding: 28px
+	padding: 16px;
+
+	@media (min-width: 48em) {
+		padding: 28px
+}
 }
