@@ -8,9 +8,10 @@
 	--radius: .8rem;
 
 	--padding-small: .8rem;
-	--padding: 1.6rem;
-	--padding-medium: 2.8rem;
+	--padding-medium: 1.6rem;
+	--padding-big: 2.8rem;
 
 	--gap-small: .8rem;
 	--gap: 1.6rem;
+	--gap-big: 2.8rem;
 }

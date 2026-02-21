@@ -4,14 +4,23 @@
 @import "./utils/screen-readers.css";
 @import "./utils/typography.css";
 
+*:focus {
+	outline: none;
+}
+
+*:focus-visible {
+	outline: 0.2rem solid var(--color-primary);
+	outline-offset: 0.2rem;
+}
+
 body {
 	background: var(--color-bg);
 	color: var(--color-text);
 	font-family: Helvetica, sans-serif;
 	min-height: 100vh;
-	padding: var(--padding);
+	padding: var(--padding-medium);
 
 	@media (min-width: 48em) {
-		padding: var(--padding-medium)
+		padding: var(--padding-big)
 	}
 }

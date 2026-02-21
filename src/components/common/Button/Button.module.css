@@ -1,0 +1,17 @@
+.button {
+	text-decoration: none;
+	background-color: var(--color-text);
+	border: .2rem solid var(--color-bg);
+	border-radius: var(--radius);
+	color: var(--color-bg);
+	cursor: pointer;
+	padding: .8rem 1.6rem;
+}
+
+.button:hover {
+	background-color: var(--color-primary);
+}
+
+.button:active {
+	transform: translate(2px, 2px);
+}

@@ -1,0 +1,131 @@
+.overlay {
+	display: none;
+	position: fixed;
+	inset: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 10;
+
+	/* Desktop : hide */
+	@media (min-width: 64em) {
+		display: none ;
+	}
+}
+
+.overlay.open {
+	display: block;
+}
+
+.panel {
+	position: fixed;
+	top: 0;
+	left: 0;
+	height: 100vh;
+	width: 85vw;
+	background: rgba(127, 7, 153, .6);
+	border-right: 0.1rem solid var(--color-royal);
+	padding: var(--padding-big) var(--padding-medium);
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-big);
+	z-index: 20;
+	transform: translateX(-100%);
+	transition: transform 0.3s ease;
+	overflow-y: auto;
+
+	@media (min-width: 48em) {
+		width: 40vw;
+	}
+
+	@media (min-width: 64em) {
+		position: sticky;
+		width: 30vw;
+		top: 2.8rem;
+		transform: none;
+		height: 92vh;
+		background: rgba(127, 7, 153, .1);
+		border: 0.1rem solid var(--color-royal);
+		border-radius: var(--radius);
+	}
+}
+
+.panel.open {
+	transform: translateX(0);
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: 1.6rem;
+	font-weight: 700;
+	color: var(--color-primary);
+}
+
+.closeBtn {
+	background: none;
+	border: none;
+	cursor: pointer;
+
+	/* Desktop : hide */
+	@media (min-width: 64em) {
+		display: none;
+	}
+}
+
+.filterGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-small);
+}
+
+.input {
+	width: 100%;
+	background: var(--color-bg);
+	border: .1rem solid var(--color-royal);
+	border-radius: var(--radius);
+	padding: var(--padding-small) var(--padding-medium);
+	color: var(--color-text);
+}
+
+.input:focus-visible {
+	border-color: var(--color-primary);
+}
+
+.checkboxLabel {
+	display: flex;
+	align-items: center;
+	gap: var(--gap-small);
+	cursor: pointer;
+}
+
+.checkbox {
+	width: 1.6rem;
+	height: 1.6rem;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
+.rangeWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-small);
+}
+
+.rangeValues {
+	display: flex;
+	justify-content: space-between;
+}
+
+.range {
+	width: 100%;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
+.resetBtn {
+	margin-top: auto;
+}
+

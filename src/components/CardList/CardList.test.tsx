@@ -1,10 +1,11 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
-import {render, screen} from "@testing-library/react";
+import {screen} from "@testing-library/react";
 import CardList from "./CardList";
-import * as useSetListModule from "../../hooks/useSetList/useSetList.ts";
+import * as useSetListModule from "../../hooks/useSetList/useSetList";
 import {mockSet} from "../../mocks/mtgjson/setListMock";
+import renderWithProvider from "../../utils/tests/renderWithProvider.tsx";
 
-vi.mock("../../hooks/useSetList");
+vi.mock("../../hooks/useSetList/useSetList");
 
 describe("CardList", () => {
     beforeEach(() => {
@@ -18,7 +19,7 @@ describe("CardList", () => {
             error: null,
         });
 
-        render(<CardList/>);
+        renderWithProvider(<CardList/>);
 
         expect(screen.getByText("Chargement...")).toBeInTheDocument();
     });
@@ -30,7 +31,7 @@ describe("CardList", () => {
             error: "Error when sets fetched",
         });
 
-        render(<CardList/>);
+        renderWithProvider(<CardList/>);
 
         expect(screen.getByText("Oh mince... Il y a eu une erreur lors du chargement des sets. Veuillez réessayer plus tard."))
             .toBeInTheDocument();
@@ -43,7 +44,7 @@ describe("CardList", () => {
             error: null,
         });
 
-        render(<CardList/>);
+        renderWithProvider(<CardList/>);
 
         expect(screen.getByText("1 sets disponibles, what... WHAT ?!")).toBeInTheDocument();
     });
@@ -55,7 +56,7 @@ describe("CardList", () => {
             error: null,
         });
 
-        render(<CardList/>);
+        renderWithProvider(<CardList/>);
 
         expect(screen.getByText("Theros Beyond Death")).toBeInTheDocument();
     });
@@ -67,8 +68,20 @@ describe("CardList", () => {
             error: null,
         });
 
-        render(<CardList/>);
+        renderWithProvider(<CardList/>);
 
         expect(screen.getByText("0 sets disponibles, what... WHAT ?!")).toBeInTheDocument();
+    });
+
+    it("should display the filter toggle button", () => {
+        vi.spyOn(useSetListModule, "default").mockReturnValue({
+            sets: [],
+            isLoading: false,
+            error: null,
+        });
+
+        renderWithProvider(<CardList/>);
+
+        expect(screen.getByRole("button", {name: "Filtres"})).toBeInTheDocument();
     });
 });

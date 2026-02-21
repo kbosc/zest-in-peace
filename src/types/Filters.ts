@@ -38,9 +38,6 @@ export interface ActiveFilters {
     foilOnly: boolean;
     isNonFoilOnly: boolean;
     onlineOnly: boolean;
-    cardCount: {
-        min: number;
-        max: number;
-    };
+    cardCountMax: number;
 }
 

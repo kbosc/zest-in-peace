@@ -18,6 +18,11 @@ export const filtersMock: AvailableFilter[] = [
         label: "Foil only",
     },
     {
+        id: "isNonFoilOnly",
+        type: "boolean",
+        label: "Non-foil only",
+    },
+    {
         id: "onlineOnly",
         type: "boolean",
         label: "Online only",
@@ -27,6 +32,6 @@ export const filtersMock: AvailableFilter[] = [
         type: "range",
         label: "Number of cards",
         min: 0,
-        max: 500,
+        max: 1000,
     },
 ];
