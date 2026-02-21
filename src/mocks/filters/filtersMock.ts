@@ -1,9 +1,7 @@
 import type {AvailableFilter} from "../../types/Filters";
 
 /**
- * Mock des filtres disponibles.
- * En production, ces données viendraient d"un endpoint API dédié.
- * Le min/max du range est calculé dynamiquement depuis les sets dans filterService.
+ * Mock for test
  */
 export const filtersMock: AvailableFilter[] = [
     {

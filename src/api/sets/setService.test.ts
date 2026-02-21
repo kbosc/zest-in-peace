@@ -1,8 +1,8 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {fetchSetList} from "./setService";
 import {getMtgjsonClient} from "../mtgjsonClient";
-import type {MtgjsonListResponse, MtgSet} from "../../types/Card";
 import {mockSet} from "../../mocks/mtgjson/setListMock";
+import type {MtgjsonListResponse, MtgSet} from "../../types/Sets.ts";
 
 vi.mock("../mtgjsonClient");
 

@@ -1,11 +1,11 @@
-import type {MtgSet} from "../../../types/Card";
-import styles from "./CardItem.module.css";
+import styles from "./SetItem.module.css";
+import type {MtgSet} from "../../../types/Sets";
 
-interface CardItemProps {
+interface SetItemProps {
     set: MtgSet;
 }
 
-const CardItem = ({set}: CardItemProps) => (
+const SetItem = ({set}: SetItemProps) => (
     <li className={styles.card}>
         <h3 className="titleSmall">{set.name}</h3>
         <div className={styles.meta}>
@@ -17,4 +17,4 @@ const CardItem = ({set}: CardItemProps) => (
     </li>
 );
 
-export default CardItem;
+export default SetItem;

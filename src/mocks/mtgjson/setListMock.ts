@@ -1,4 +1,4 @@
-import type {MtgSet} from "../../types/Card.ts";
+import type {MtgSet} from "../../types/Sets.ts";
 
 export const mockSet: MtgSet = {
     baseSetSize: 254,

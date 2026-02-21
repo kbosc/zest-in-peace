@@ -1,18 +1,17 @@
 import {getMtgjsonClient} from "../mtgjsonClient";
-import type {MtgjsonListResponse, MtgSet} from "../../types/Card";
+import type {MtgjsonListResponse, MtgSet} from "../../types/Sets.ts";
 
 /**
- * Get all set list MTG from MTGJSON API .
+ * Get all set list MTG from MTGJSON API.
  */
-export const fetchSetList = async (): Promise<MtgSet[]> => {
-    const response = await getMtgjsonClient.get<MtgjsonListResponse<MtgSet>>("/SetList.json");
-    return response.data.data;
-};
+export const fetchSetList = (): Promise<MtgSet[]> =>
+    getMtgjsonClient
+        .get<MtgjsonListResponse<MtgSet>>("/SetList.json")
+        .then((response) => response.data.data);
 
 /*
-export const fetchCardList = async (setCode: string) => {
-  const response = await getMtgjsonClient.get(`/Set/${setCode}.json`);
-  return response.data.data.cards;
-};
+export const fetchCardList = (setCode: string): Promise<Card[]> =>
+    getMtgjsonClient
+        .get<MtgjsonCardListResponse>(`/Set/${setCode}.json`)
+        .then((response) => response.data.data.cards);
  */
-

@@ -1,0 +1,31 @@
+[
+  {
+    "id": "name",
+    "type": "text",
+    "label": "Search by name",
+    "placeholder": "ex: Theros..."
+  },
+  {
+    "id": "foilOnly",
+    "type": "boolean",
+    "label": "Foil only"
+  },
+  {
+    "id": "isNonFoilOnly",
+    "type": "boolean",
+    "label": "Non-foil only"
+  },
+  {
+    "id": "onlineOnly",
+    "type": "boolean",
+    "label": "Online only"
+  },
+  {
+    "id": "cardCount",
+    "type": "range",
+    "label": "Number of cards",
+    "min": 0,
+    "max": 1000
+  }
+]
+

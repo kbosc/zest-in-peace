@@ -1,6 +1,8 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {fetchSetList} from "../../api/sets/setService";
-import type {MtgSet} from "../../types/Card.ts";
+import {fetchSetsFailure, fetchSetsStart, fetchSetsSuccess} from "../../features/sets/setsSlice";
+import {useAppDispatch, useAppSelector} from "../../app/hooks";
+import type {MtgSet} from "../../types/Sets";
 
 interface UseSetListResult {
     sets: MtgSet[];
@@ -9,39 +11,35 @@ interface UseSetListResult {
 }
 
 /**
- * Hook custom get list of all MTG set.
- * Manage loading, error and data states.
+ * Hook custom that load the MTG set list once and dispatch to Redux.
+ * Should be called only once at the App level.
+ * Other components should read directly from the store.
  */
 const useSetList = (): UseSetListResult => {
-    const [sets, setSets] = useState<MtgSet[]>([]);
-    const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const dispatch = useAppDispatch();
+    const {allSets, isLoading, error} = useAppSelector((state) => state.sets);
 
     useEffect(() => {
+        if (allSets.length > 0) return;
+
         let cancelled = false;
 
-        const load = async () => {
-            try {
-                setIsLoading(true);
-                setError(null);
-                const data = await fetchSetList();
-                if (!cancelled) setSets(data);
-            } catch {
-                if (!cancelled) setError("Error when sets fetched");
-            } finally {
-                if (!cancelled) setIsLoading(false);
-            }
-        };
+        dispatch(fetchSetsStart());
 
-        load();
+        fetchSetList()
+            .then((data) => {
+                if (!cancelled) dispatch(fetchSetsSuccess(data));
+            })
+            .catch(() => {
+                if (!cancelled) dispatch(fetchSetsFailure("Error when sets fetched"));
+            });
 
         return () => {
             cancelled = true;
         };
-    }, []);
+    }, [dispatch, allSets.length]);
 
-    return {sets, isLoading, error};
+    return {sets: allSets, isLoading, error};
 };
 
 export default useSetList;
-

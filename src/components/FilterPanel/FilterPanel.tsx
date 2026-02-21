@@ -1,4 +1,3 @@
-import useFilterList from "../../hooks/useFilterList/useFilterList";
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {
     resetFilters,
@@ -14,7 +13,7 @@ import {useEffect, useRef} from "react";
 import Button from "../common/Button/Button.tsx";
 
 const FilterPanel = () => {
-    const {filters} = useFilterList();
+    const filters = useAppSelector((state) => state.filters.available);
     const dispatch = useAppDispatch();
     const active = useAppSelector((state) => state.filters.active);
     const isPanelOpen = useAppSelector(state => state.filters.isPanelOpen);
