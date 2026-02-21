@@ -1,7 +1,7 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {render, screen} from "@testing-library/react";
 import CardList from "./CardList";
-import * as useSetListModule from "../../hooks/useSetList";
+import * as useSetListModule from "../../hooks/useSetList/useSetList.ts";
 import {mockSet} from "../../mocks/mtgjson/setListMock";
 
 vi.mock("../../hooks/useSetList");

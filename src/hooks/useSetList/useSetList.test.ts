@@ -1,9 +1,9 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
 import {renderHook, waitFor} from "@testing-library/react";
-import useSetList from "./useSetList";
-import * as setService from "../api/setService";
-import type {MtgSet} from "../types/Card";
-import {mockSet} from "../mocks/mtgjson/setListMock.ts";
+import useSetList from "./useSetList.ts";
+import * as setService from "../../api/setService.ts";
+import type {MtgSet} from "../../types/Card.ts";
+import {mockSet} from "../../mocks/mtgjson/setListMock.ts";
 
 vi.mock("../api/setService");
 
