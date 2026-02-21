@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {fetchSetList} from "../../api/setService.ts";
+import {fetchSetList} from "../../api/sets/setService";
 import type {MtgSet} from "../../types/Card.ts";
 
 interface UseSetListResult {

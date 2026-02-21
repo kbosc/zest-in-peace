@@ -1,5 +1,5 @@
-import {filtersMock} from "../mocks/filters/filtersMock";
-import type {AvailableFilter} from "../types/Filters";
+import {filtersMock} from "../../mocks/filters/filtersMock";
+import type {AvailableFilter} from "../../types/Filters";
 
 /**
  * Simulate fetching filters API
