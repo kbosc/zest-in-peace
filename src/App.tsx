@@ -1,4 +1,3 @@
-import {useEffect} from "react";
 import "./styles/global.css";
 import useSetList from "./hooks/useSetList/useSetList";
 import useFilterList from "./hooks/useFilterList/useFilterList";
@@ -12,20 +11,8 @@ import styles from "./App.module.css";
  * Child components read data directly from the Redux store.
  */
 const App = () => {
-    const {sets, isLoading, error} = useSetList();
-    const {filters} = useFilterList();
-
-    useEffect(() => {
-        if (filters.length > 0) {
-            console.log("[App] Available filters :", filters);
-        }
-    }, [filters]);
-
-    useEffect(() => {
-        if (!isLoading && !error) {
-            console.log("[App] Sets loaded :", sets);
-        }
-    }, [sets, isLoading, error]);
+    useSetList();
+    useFilterList();
 
     return (
         <div className={styles.layout}>
