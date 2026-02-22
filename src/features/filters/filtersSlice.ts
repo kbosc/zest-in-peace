@@ -5,6 +5,13 @@ import {loadFromStorage, removeFromStorage, saveToStorage} from "../../utils/loc
 import {STORAGE_KEYS} from "../../utils/localStorage/storageKeys.ts";
 import {defaultActive} from "./filtersSlice.constants.ts";
 
+/**
+ * If an add filter in mock filters.json we need to modify next element
+ * 1. src/types/Filters.ts ⇒ ActiveFilters
+ * 2. src/utils/localStorage/storageKeys.ts ⇒ STORAGE_KEYS
+ * 3. src/features/filters/filtersSlice.ts ⇒ FILTER_STORAGE_MAP + initialState
+ */
+
 interface FiltersState {
     available: AvailableFilter[];
     active: ActiveFilters;
