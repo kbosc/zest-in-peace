@@ -54,6 +54,13 @@ const filtersSlice = createSlice({
             state.active = defaultActive;
             Object.values(STORAGE_KEYS).forEach(removeFromStorage);
         },
+        clearFilter(state, action: PayloadAction<Partial<ActiveFilters>>) {
+            state.active = {...state.active, ...action.payload};
+            if ("name" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_NAME);
+            if ("foilOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_FOIL_ONLY);
+            if ("isNonFoilOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_IS_NON_FOIL_ONLY);
+            if ("onlineOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_ONLINE_ONLY);
+        },
         setPanel(state, action: PayloadAction<boolean>) {
             state.isPanelOpen = action.payload;
         },
@@ -68,6 +75,7 @@ export const {
     setOnlineOnly,
     setCardCountMax,
     resetFilters,
+    clearFilter,
     setPanel,
 } = filtersSlice.actions;
 

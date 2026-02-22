@@ -1,7 +1,23 @@
-.tag {
-    display: inline-flex;
-    align-items: center;
-    padding: 0.4rem 1rem;
-    border-radius: 2rem;
-    background-color: var(--color-royal);
+.tagList {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--gap-small);
+	padding: .4rem var(--padding-small);
+	background-color: var(--color-royal);
+	border-radius: 2rem;
+	white-space: nowrap;
+}
+
+.removeBtn {
+	width: 1.6rem;
+	border: none;
+	border-radius: 50%;
+	background: transparent;
+	color: inherit;
+	cursor: pointer;
+	transition: background-color 0.15s ease;
+}
+
+.removeBtn:hover {
+	background-color: rgba(255, 255, 255, 0.2);
 }

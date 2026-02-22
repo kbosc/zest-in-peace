@@ -1,5 +1,6 @@
 import {afterEach, describe, expect, it} from "vitest";
 import filtersReducer, {
+    clearFilter,
     initialState,
     resetFilters,
     setAvailableFilters,
@@ -123,6 +124,74 @@ describe("filtersSlice", () => {
         it("should not reset isPanelOpen", () => {
             let state = filtersReducer(getInitialState(), setPanel(true));
             state = filtersReducer(state, resetFilters());
+            expect(state.isPanelOpen).toBe(true);
+        });
+    });
+
+    describe("clearFilter", () => {
+        it("should reset only the name filter", () => {
+            let state = filtersReducer(getInitialState(), setNameFilter("Conspiracy"));
+            state = filtersReducer(state, setFoilOnly(true));
+
+            state = filtersReducer(state, clearFilter({name: ""}));
+
+            expect(state.active.name).toBe("");
+            expect(state.active.foilOnly).toBe(true);
+        });
+
+        it("should reset only the foilOnly filter", () => {
+            let state = filtersReducer(getInitialState(), setFoilOnly(true));
+            state = filtersReducer(state, setOnlineOnly(true));
+
+            state = filtersReducer(state, clearFilter({foilOnly: false}));
+
+            expect(state.active.foilOnly).toBe(false);
+            expect(state.active.onlineOnly).toBe(true);
+        });
+
+        it("should reset only the isNonFoilOnly filter", () => {
+            let state = filtersReducer(getInitialState(), setIsNonFoilOnly(true));
+            state = filtersReducer(state, setFoilOnly(true));
+
+            state = filtersReducer(state, clearFilter({isNonFoilOnly: false}));
+
+            expect(state.active.isNonFoilOnly).toBe(false);
+            expect(state.active.foilOnly).toBe(true);
+        });
+
+        it("should reset only the onlineOnly filter", () => {
+            let state = filtersReducer(getInitialState(), setOnlineOnly(true));
+            state = filtersReducer(state, setFoilOnly(true));
+
+            state = filtersReducer(state, clearFilter({onlineOnly: false}));
+
+            expect(state.active.onlineOnly).toBe(false);
+            expect(state.active.foilOnly).toBe(true);
+        });
+
+        it("should remove only the name key from localStorage", () => {
+            filtersReducer(getInitialState(), setNameFilter("New Capenna"));
+            filtersReducer(getInitialState(), setFoilOnly(true));
+
+            filtersReducer(getInitialState(), clearFilter({name: ""}));
+
+            expect(localStorage.getItem(STORAGE_KEYS.FILTER_NAME)).toBeNull();
+            expect(localStorage.getItem(STORAGE_KEYS.FILTER_FOIL_ONLY)).toBe("true");
+        });
+
+        it("should remove only the foilOnly key from localStorage", () => {
+            filtersReducer(getInitialState(), setNameFilter("Theros"));
+            filtersReducer(getInitialState(), setFoilOnly(true));
+
+            filtersReducer(getInitialState(), clearFilter({foilOnly: false}));
+
+            expect(localStorage.getItem(STORAGE_KEYS.FILTER_FOIL_ONLY)).toBeNull();
+            expect(localStorage.getItem(STORAGE_KEYS.FILTER_NAME)).toBe('"Theros"');
+        });
+
+        it("should not affect isPanelOpen", () => {
+            let state = filtersReducer(getInitialState(), setPanel(true));
+            state = filtersReducer(state, clearFilter({name: ""}));
             expect(state.isPanelOpen).toBe(true);
         });
     });
