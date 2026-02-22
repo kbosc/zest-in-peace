@@ -6,7 +6,7 @@ import {useAppDispatch, useAppSelector} from "../../app/hooks";
 import {setPanel} from "../../features/filters/filtersSlice";
 import {useEffect, useRef} from "react";
 import Button from "../common/Button/Button";
-import {filterSets} from "../../utils/filterSets";
+import {filterSets} from "../../utils/filterSets/filterSets.ts";
 
 const SET_LOAD_ERROR = "Oh mince... Il y a eu une erreur lors du chargement des sets. Veuillez réessayer plus tard.";
 
@@ -20,7 +20,6 @@ const SetList = () => {
     const filteredSets = filterSets(allSets, activeFilters);
 
     console.log("[SetList] Active filters :", activeFilters);
-    console.log("[SetList] All sets :", allSets);
 
     useEffect(() => {
         if (!isPanelOpen && burgerBtnRef.current) {

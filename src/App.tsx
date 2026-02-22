@@ -4,6 +4,7 @@ import useFilterList from "./hooks/useFilterList/useFilterList";
 import SetList from "./components/SetList/SetList";
 import FilterPanel from "./components/FilterPanel/FilterPanel";
 import styles from "./App.module.css";
+import TagsList from "./components/TagsList/TagsList.tsx";
 
 /**
  * single entry point for data fetching.
@@ -18,6 +19,7 @@ const App = () => {
         <div className={styles.layout}>
             <FilterPanel/>
             <main className={styles.mainContent}>
+                <TagsList/>
                 <SetList/>
             </main>
         </div>

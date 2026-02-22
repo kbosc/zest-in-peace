@@ -1,8 +1,8 @@
 import {describe, expect, it} from "vitest";
-import {filterSets} from "./filterSets";
-import {mockSet} from "../mocks/mtgjson/setListMock";
-import type {MtgSet} from "../types/Sets";
-import {defaultActive} from "../features/filters/filtersSlice.constants.ts";
+import {filterSets} from "./filterSets.ts";
+import {mockSet} from "../../mocks/mtgjson/setListMock.ts";
+import type {MtgSet} from "../../types/Sets.ts";
+import {defaultActive} from "../../features/filters/filtersSlice.constants.ts";
 
 const foilSet: MtgSet = {
     ...mockSet,

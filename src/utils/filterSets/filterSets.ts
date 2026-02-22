@@ -1,5 +1,5 @@
-import type {ActiveFilters} from "../types/Filters";
-import type {MtgSet} from "../types/Sets";
+import type {ActiveFilters} from "../../types/Filters.ts";
+import type {MtgSet} from "../../types/Sets.ts";
 
 /**
  * Filters setsList based on active filters.
