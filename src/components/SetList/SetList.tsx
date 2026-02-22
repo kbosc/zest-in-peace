@@ -42,7 +42,7 @@ const SetList = () => {
                     aria-label="Open filters panel"
                     aria-expanded={isPanelOpen}
                 >
-                    Filtres
+                    Filters
                 </Button>
             </div>
             <ul className={styles.list}>

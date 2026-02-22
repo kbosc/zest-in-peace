@@ -59,6 +59,6 @@ describe("SetList", () => {
 
         renderWithProvider(<SetList/>, store);
 
-        expect(screen.getByRole("button", {name: "Filtres"})).toBeInTheDocument();
+        expect(screen.getByRole("button", {name: "Filters"})).toBeInTheDocument();
     });
 });
