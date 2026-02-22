@@ -26,11 +26,5 @@
     "label": "Number of cards",
     "min": 0,
     "max": 1000
-  },
-  {
-    "_comment": "Ajouter un filtre ici requiert aussi de modifier ces fichiers :",
-    "_comment1": "Filters.ts => ActiveFilters",
-    "_comment2": "storageKeys.ts => STORAGE_KEYS",
-    "_comment3": "filtersSlice.ts => FILTER_STORAGE_MAP + initialState"
   }
 ]

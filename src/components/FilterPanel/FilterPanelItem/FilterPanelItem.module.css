@@ -1,0 +1,50 @@
+.filterGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-small);
+}
+
+.input {
+	width: 100%;
+	background: var(--color-bg);
+	border: .1rem solid var(--color-royal);
+	border-radius: var(--radius);
+	padding: var(--padding-small) var(--padding-medium);
+	color: var(--color-text);
+}
+
+.input:focus-visible {
+	border-color: var(--color-primary);
+}
+
+.checkboxLabel {
+	display: flex;
+	align-items: center;
+	gap: var(--gap-small);
+	cursor: pointer;
+}
+
+.checkbox {
+	width: 1.6rem;
+	height: 1.6rem;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
+.rangeWrapper {
+	display: flex;
+	flex-direction: column;
+	gap: var(--gap-small);
+}
+
+.rangeValues {
+	display: flex;
+	justify-content: space-between;
+}
+
+.range {
+	width: 100%;
+	accent-color: var(--color-primary);
+	cursor: pointer;
+}
+
