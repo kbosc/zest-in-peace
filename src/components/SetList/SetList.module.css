@@ -4,6 +4,13 @@
 	gap: var(--gap);
 }
 
+.header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--gap);
+}
+
 .error {
 	color: var(--color-secondary);
 	text-align: center;
@@ -11,6 +18,12 @@
 
 .count {
 	color: var(--color-primary);
+}
+
+.buttonPanel {
+	@media (min-width: 64em) {
+		display: none;
+	}
 }
 
 .list {

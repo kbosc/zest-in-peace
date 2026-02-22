@@ -7,6 +7,7 @@ import {setPanel} from "../../features/filters/filtersSlice";
 import {useEffect, useRef} from "react";
 import Button from "../common/Button/Button";
 import {filterSets} from "../../utils/filterSets/filterSets.ts";
+import {mergeClassNames} from "../../utils/mergeClassNames/mergeClassNames.ts";
 
 const SET_LOAD_ERROR = "Oh mince... Il y a eu une erreur lors du chargement des sets. Veuillez réessayer plus tard.";
 
@@ -32,14 +33,14 @@ const SetList = () => {
 
     return (
         <div className={styles.container}>
-            <div>
+            <div className={styles.header}>
                 <p className={`textSmall ${styles.count}`}>
                     {filteredSets.length} / {allSets.length} sets available
                 </p>
                 <Button
                     ref={burgerBtnRef}
                     onClick={() => dispatch(setPanel(!isPanelOpen))}
-                    className="textBig"
+                    className={mergeClassNames(styles.buttonPanel, "textBig")}
                     aria-label="Open filters panel"
                     aria-expanded={isPanelOpen}
                 >

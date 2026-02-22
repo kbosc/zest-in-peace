@@ -38,13 +38,13 @@ describe("Tag", () => {
 
         it("should render the remove button when removable and onRemove are provided", () => {
             renderTag("It shines", true, vi.fn());
-            expect(screen.getByRole("button", {name: "remove filter: it shines"})).toBeInTheDocument();
+            expect(screen.getByRole("button", {name: "Remove filter: It shines"})).toBeInTheDocument();
         });
 
         it("should call onRemove when the button is clicked", () => {
             const onRemove = vi.fn();
             renderTag("Online only", true, onRemove);
-            fireEvent.click(screen.getByRole("button", {name: "remove filter"}));
+            fireEvent.click(screen.getByRole("button", {name: "Remove filter: Online only"}));
             expect(onRemove).toHaveBeenCalledTimes(1);
         });
 

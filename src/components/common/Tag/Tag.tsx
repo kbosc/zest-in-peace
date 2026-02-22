@@ -1,4 +1,5 @@
 import styles from "./Tag.module.css";
+import {mergeClassNames} from "../../../utils/mergeClassNames/mergeClassNames";
 
 interface TagProps {
     label: string;
@@ -7,8 +8,8 @@ interface TagProps {
     className?: string;
 }
 
-const Tag = ({label, removable = false, onRemove, className}: TagProps) =>  {
-    const liClassName = [styles.tagList, className].filter(Boolean).join(" ");
+const Tag = ({label, removable = false, onRemove, className}: TagProps) => {
+    const liClassName = mergeClassNames(styles.tag, className);
 
     return (
         <li className={liClassName}>

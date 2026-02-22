@@ -11,7 +11,7 @@ const TagsList = () => {
     console.log({tags})
 
     return (
-        <section aria-label="Active filters">
+        <section aria-label="Active filters" className={styles.tagListContainer}>
             <h2 className="visuallyHidden">Active filters</h2>
             <ul
                 aria-label={`${tags.length} active filter${tags.length > 1 ? "s" : ""}`}

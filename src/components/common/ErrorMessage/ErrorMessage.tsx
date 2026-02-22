@@ -1,4 +1,5 @@
 import styles from "./ErrorMessage.module.css";
+import {mergeClassNames} from "../../../utils/mergeClassNames/mergeClassNames";
 
 interface ErrorMessageProps {
     message: string;
@@ -6,7 +7,7 @@ interface ErrorMessageProps {
 }
 
 const ErrorMessage = ({message, className}: ErrorMessageProps) => (
-    <p role="alert" className={`${styles.error}${className ? ` ${className}` : ""}`}>
+    <p role="alert" className={mergeClassNames(styles.error, className)}>
         {message}
     </p>
 );
