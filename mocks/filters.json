@@ -1,0 +1,36 @@
+[
+  {
+    "id": "name",
+    "type": "text",
+    "label": "Search by name",
+    "placeholder": "ex: Theros..."
+  },
+  {
+    "id": "foilOnly",
+    "type": "boolean",
+    "label": "Foil only"
+  },
+  {
+    "id": "isNonFoilOnly",
+    "type": "boolean",
+    "label": "Non-foil only"
+  },
+  {
+    "id": "onlineOnly",
+    "type": "boolean",
+    "label": "Online only"
+  },
+  {
+    "id": "cardCount",
+    "type": "range",
+    "label": "Number of cards",
+    "min": 0,
+    "max": 1000
+  },
+  {
+    "_comment": "Ajouter un filtre ici requiert aussi de modifier ces fichiers :",
+    "_comment1": "Filters.ts => ActiveFilters",
+    "_comment2": "storageKeys.ts => STORAGE_KEYS",
+    "_comment3": "filtersSlice.ts => FILTER_STORAGE_MAP + initialState"
+  }
+]
