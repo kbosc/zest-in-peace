@@ -8,8 +8,8 @@ import {useEffect, useRef} from "react";
 import Button from "../common/Button/Button";
 import {filterSets} from "../../utils/filterSets/filterSets.ts";
 import {mergeClassNames} from "../../utils/mergeClassNames/mergeClassNames.ts";
+import {SET_LOAD_ERROR} from "./SetList.constants.ts";
 
-const SET_LOAD_ERROR = "Oh mince... Il y a eu une erreur lors du chargement des sets. Veuillez réessayer plus tard.";
 
 const SetList = () => {
     const {allSets, isLoading, error} = useAppSelector((state) => state.sets);
@@ -19,8 +19,6 @@ const SetList = () => {
     const burgerBtnRef = useRef<HTMLButtonElement>(null);
 
     const filteredSets = filterSets(allSets, activeFilters);
-
-    console.log("[SetList] Active filters :", activeFilters);
 
     useEffect(() => {
         if (!isPanelOpen && burgerBtnRef.current) {

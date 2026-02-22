@@ -5,10 +5,12 @@ import Tag from "../common/Tag/Tag";
 import styles from "./TagsList.module.css";
 
 const TagsList = () => {
+    const {isLoading} = useAppSelector((state) => state.sets);
     const dispatch = useAppDispatch();
     const activeFilters = useAppSelector((state) => state.filters.active);
     const tags = filterTags(activeFilters);
-    console.log({tags})
+
+    if (isLoading) return null;
 
     return (
         <section aria-label="Active filters" className={styles.tagListContainer}>

@@ -3,7 +3,7 @@ import {fireEvent, screen} from "@testing-library/react";
 import TagsList from "./TagsList";
 import {createTestStore} from "../../utils/tests/createTestWrapper";
 import renderWithProvider from "../../utils/tests/renderWithProvider";
-import {setFoilOnly, setNameFilter, setOnlineOnly} from "../../features/filters/filtersSlice";
+import {setActiveFilter} from "../../features/filters/filtersSlice";
 
 describe("TagsList", () => {
     describe("accessibility", () => {
@@ -28,7 +28,7 @@ describe("TagsList", () => {
 
         it("should use plural when there are multiple active filters", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Franklin"));
+            store.dispatch(setActiveFilter({id: "name", value: "Franklin"}));
             renderWithProvider(<TagsList/>, store);
             expect(screen.getByRole("list", {name: "2 active filters"})).toBeInTheDocument();
         });
@@ -49,22 +49,22 @@ describe("TagsList", () => {
 
         it("should display the name tag when name filter is set", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Lorwyn"));
+            store.dispatch(setActiveFilter({id: "name", value: "Lorwyn"}));
             renderWithProvider(<TagsList/>, store);
             expect(screen.getByText('Name contains "Lorwyn"')).toBeInTheDocument();
         });
 
         it("should display a remove button on the name tag", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Theros"));
+            store.dispatch(setActiveFilter({id: "name", value: "Theros"}));
             renderWithProvider(<TagsList/>, store);
             expect(screen.getByRole("button", {name: "Remove filter: Name contains \"Theros\""})).toBeInTheDocument();
         });
 
         it("should render one Tag per active filter", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Theros"));
-            store.dispatch(setFoilOnly(true));
+            store.dispatch(setActiveFilter({id: "name", value: "Theros"}));
+            store.dispatch(setActiveFilter({id: "foilOnly", value: true}));
             renderWithProvider(<TagsList/>, store);
 
             expect(screen.getAllByRole("listitem")).toHaveLength(3);
@@ -74,7 +74,7 @@ describe("TagsList", () => {
     describe("filter removal", () => {
         it("should remove the name filter from the store when its tag is removed", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Tarkir"));
+            store.dispatch(setActiveFilter({id: "name", value: "Tarkir"}));
             renderWithProvider(<TagsList/>, store);
 
             fireEvent.click(screen.getByRole("button", {name: "Remove filter: Name contains \"Tarkir\""}));
@@ -84,7 +84,7 @@ describe("TagsList", () => {
 
         it("should remove the foilOnly filter from the store when its tag is removed", () => {
             const store = createTestStore();
-            store.dispatch(setFoilOnly(true));
+            store.dispatch(setActiveFilter({id: "foilOnly", value: true}));
             renderWithProvider(<TagsList/>, store);
 
             fireEvent.click(screen.getByRole("button", {name: "Remove filter: It shines"}));
@@ -94,7 +94,7 @@ describe("TagsList", () => {
 
         it("should remove the onlineOnly filter from the store when its tag is removed", () => {
             const store = createTestStore();
-            store.dispatch(setOnlineOnly(true));
+            store.dispatch(setActiveFilter({id: "onlineOnly", value: true}));
             renderWithProvider(<TagsList/>, store);
 
             fireEvent.click(screen.getByRole("button", {name: "Remove filter: Online only"}));
@@ -104,8 +104,8 @@ describe("TagsList", () => {
 
         it("should not affect other active filters when removing one", () => {
             const store = createTestStore();
-            store.dispatch(setNameFilter("Scourge"));
-            store.dispatch(setFoilOnly(true));
+            store.dispatch(setActiveFilter({id: "name", value: "Scourge"}));
+            store.dispatch(setActiveFilter({id: "foilOnly", value: true}));
             renderWithProvider(<TagsList/>, store);
 
             fireEvent.click(screen.getByRole("button", {name: "Remove filter: Name contains \"Scourge\""}));

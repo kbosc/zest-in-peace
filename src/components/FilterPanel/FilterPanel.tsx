@@ -1,13 +1,6 @@
 import {useAppDispatch, useAppSelector} from "../../app/hooks";
-import {
-    resetFilters,
-    setCardCountMax,
-    setFoilOnly,
-    setIsNonFoilOnly,
-    setNameFilter,
-    setOnlineOnly,
-    setPanel,
-} from "../../features/filters/filtersSlice";
+import {resetFilters, setActiveFilter, setPanel} from "../../features/filters/filtersSlice";
+import type {ActiveFilters} from "../../types/Filters";
 import styles from "./FilterPanel.module.css";
 import {useEffect, useRef} from "react";
 import Button from "../common/Button/Button.tsx";
@@ -22,13 +15,17 @@ const FilterPanel = () => {
 
     useEffect(() => {
         if (isPanelOpen && closeBtnRef.current) {
-            closeBtnRef.current?.focus()
+            closeBtnRef.current?.focus();
         }
     }, [isPanelOpen]);
 
+    const handleChange = (id: keyof ActiveFilters, value: ActiveFilters[keyof ActiveFilters]) => {
+        dispatch(setActiveFilter({id, value}));
+    };
+
     const renderFilter = (filter: (typeof filters)[number]) => {
         switch (filter.type) {
-            case "text": {
+            case "text":
                 return (
                     <div key={filter.id} className={styles.filterGroup}>
                         <label className="titleSmall" htmlFor={filter.id}>
@@ -40,33 +37,25 @@ const FilterPanel = () => {
                             className={styles.input}
                             placeholder={filter.placeholder}
                             value={active.name}
-                            onChange={(e) => dispatch(setNameFilter(e.target.value))}
+                            onChange={(e) => handleChange("name", e.target.value)}
                         />
                     </div>
                 );
-            }
-            case "boolean": {
-                const value = active[filter.id as keyof typeof active] as boolean;
-                const handleChange = (checked: boolean) => {
-                    if (filter.id === "foilOnly") dispatch(setFoilOnly(checked));
-                    if (filter.id === "isNonFoilOnly") dispatch(setIsNonFoilOnly(checked));
-                    if (filter.id === "onlineOnly") dispatch(setOnlineOnly(checked));
-                };
+            case "boolean":
                 return (
                     <div key={filter.id}>
                         <label className={styles.checkboxLabel}>
                             <input
                                 type="checkbox"
                                 className={styles.checkbox}
-                                checked={value}
-                                onChange={(e) => handleChange(e.target.checked)}
+                                checked={active[filter.id as keyof ActiveFilters] as boolean}
+                                onChange={(e) => handleChange(filter.id as keyof ActiveFilters, e.target.checked)}
                             />
                             {filter.label}
                         </label>
                     </div>
                 );
-            }
-            case "range": {
+            case "range":
                 return (
                     <div key={filter.id} className={styles.filterGroup}>
                         <span>{filter.label}</span>
@@ -81,12 +70,11 @@ const FilterPanel = () => {
                                 min={filter.min}
                                 max={filter.max}
                                 value={active.cardCountMax}
-                                onChange={(e) => dispatch(setCardCountMax(Number(e.target.value)))}
+                                onChange={(e) => handleChange("cardCountMax", Number(e.target.value))}
                             />
                         </div>
                     </div>
                 );
-            }
         }
     };
 
@@ -98,8 +86,6 @@ const FilterPanel = () => {
                 onClick={handleClose}
                 onKeyDown={(e) => e.key === "Escape" && handleClose()}
             />
-
-            {/* Pannel */}
             <aside className={`${styles.panel} ${isPanelOpen ? styles.open : ""}`}>
                 <div className={styles.header}>
                     <h2 className={styles.title}>Filters</h2>
@@ -127,6 +113,3 @@ const FilterPanel = () => {
 };
 
 export default FilterPanel;
-
-
-

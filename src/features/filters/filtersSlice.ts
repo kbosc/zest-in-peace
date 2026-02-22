@@ -11,6 +11,17 @@ interface FiltersState {
     isPanelOpen: boolean;
 }
 
+/**
+ * Add a new entry here when adding a new filter
+ */
+const FILTER_STORAGE_MAP: Partial<Record<keyof ActiveFilters, string>> = {
+    name: STORAGE_KEYS.FILTER_NAME,
+    foilOnly: STORAGE_KEYS.FILTER_FOIL_ONLY,
+    isNonFoilOnly: STORAGE_KEYS.FILTER_IS_NON_FOIL_ONLY,
+    onlineOnly: STORAGE_KEYS.FILTER_ONLINE_ONLY,
+    cardCountMax: STORAGE_KEYS.FILTER_CARD_COUNT_MAX,
+};
+
 export const initialState: FiltersState = {
     available: [],
     active: {
@@ -30,25 +41,11 @@ const filtersSlice = createSlice({
         setAvailableFilters(state, action: PayloadAction<AvailableFilter[]>) {
             state.available = action.payload;
         },
-        setNameFilter(state, action: PayloadAction<string>) {
-            state.active.name = action.payload;
-            saveToStorage(STORAGE_KEYS.FILTER_NAME, action.payload);
-        },
-        setFoilOnly(state, action: PayloadAction<boolean>) {
-            state.active.foilOnly = action.payload;
-            saveToStorage(STORAGE_KEYS.FILTER_FOIL_ONLY, action.payload);
-        },
-        setIsNonFoilOnly(state, action: PayloadAction<boolean>) {
-            state.active.isNonFoilOnly = action.payload;
-            saveToStorage(STORAGE_KEYS.FILTER_IS_NON_FOIL_ONLY, action.payload);
-        },
-        setOnlineOnly(state, action: PayloadAction<boolean>) {
-            state.active.onlineOnly = action.payload;
-            saveToStorage(STORAGE_KEYS.FILTER_ONLINE_ONLY, action.payload);
-        },
-        setCardCountMax(state, action: PayloadAction<number>) {
-            state.active.cardCountMax = action.payload;
-            saveToStorage(STORAGE_KEYS.FILTER_CARD_COUNT_MAX, action.payload);
+        setActiveFilter(state, action: PayloadAction<{id: keyof ActiveFilters; value: ActiveFilters[keyof ActiveFilters]}>) {
+            const {id, value} = action.payload;
+            (state.active[id] as typeof value) = value;
+            const storageKey = FILTER_STORAGE_MAP[id];
+            if (storageKey) saveToStorage(storageKey, value);
         },
         resetFilters(state) {
             state.active = defaultActive;
@@ -56,10 +53,10 @@ const filtersSlice = createSlice({
         },
         clearFilter(state, action: PayloadAction<Partial<ActiveFilters>>) {
             state.active = {...state.active, ...action.payload};
-            if ("name" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_NAME);
-            if ("foilOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_FOIL_ONLY);
-            if ("isNonFoilOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_IS_NON_FOIL_ONLY);
-            if ("onlineOnly" in action.payload) removeFromStorage(STORAGE_KEYS.FILTER_ONLINE_ONLY);
+            Object.keys(action.payload).forEach((id) => {
+                const storageKey = FILTER_STORAGE_MAP[id as keyof ActiveFilters];
+                if (storageKey) removeFromStorage(storageKey);
+            });
         },
         setPanel(state, action: PayloadAction<boolean>) {
             state.isPanelOpen = action.payload;
@@ -69,11 +66,7 @@ const filtersSlice = createSlice({
 
 export const {
     setAvailableFilters,
-    setNameFilter,
-    setFoilOnly,
-    setIsNonFoilOnly,
-    setOnlineOnly,
-    setCardCountMax,
+    setActiveFilter,
     resetFilters,
     clearFilter,
     setPanel,
