@@ -30,6 +30,6 @@ export const filtersMock: AvailableFilter[] = [
         type: "range",
         label: "Number of cards",
         min: 0,
-        max: 1000,
+        max: 5000,
     },
 ];

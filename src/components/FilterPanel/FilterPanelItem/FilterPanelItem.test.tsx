@@ -18,7 +18,7 @@ describe("FilterPanelItem", () => {
     });
 
     it("should render a slider for a range filter", () => {
-        const filter: AvailableFilter = {id: "cardCount", type: "range", label: "Number of cards", min: 0, max: 1000};
+        const filter: AvailableFilter = {id: "cardCount", type: "range", label: "Number of cards", min: 0, max: 5000};
         render(<FilterPanelItem filter={filter} active={defaultActive} onChange={vi.fn()}/>);
         expect(screen.getByRole("slider")).toBeInTheDocument();
     });

@@ -38,7 +38,7 @@ describe("TagsList", () => {
         it("should always display the cardCountMax tag", () => {
             const store = createTestStore();
             renderWithProvider(<TagsList/>, store);
-            expect(screen.getByText("Max 1000 cards")).toBeInTheDocument();
+            expect(screen.getByText("Max 5000 cards")).toBeInTheDocument();
         });
 
         it("should not show a remove button on the cardCountMax tag", () => {

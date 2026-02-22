@@ -23,7 +23,7 @@ describe("filtersSlice", () => {
             expect(state.active.foilOnly).toBe(false);
             expect(state.active.isNonFoilOnly).toBe(false);
             expect(state.active.onlineOnly).toBe(false);
-            expect(state.active.cardCountMax).toBe(1000);
+            expect(state.active.cardCountMax).toBe(5000);
         });
 
         it("should hydrate name from localStorage", () => {
@@ -102,7 +102,7 @@ describe("filtersSlice", () => {
 
             expect(state.active.name).toBe("");
             expect(state.active.foilOnly).toBe(false);
-            expect(state.active.cardCountMax).toBe(1000);
+            expect(state.active.cardCountMax).toBe(5000);
         });
 
         it("should clear all filter keys from localStorage on reset", () => {

@@ -27,7 +27,7 @@ describe("Tag", () => {
 
     describe("remove button", () => {
         it("should not render the remove button when removable is false", () => {
-            renderTag("Max 1000 cards", false);
+            renderTag("Max 5000 cards", false);
             expect(screen.queryByRole("button")).not.toBeInTheDocument();
         });
 

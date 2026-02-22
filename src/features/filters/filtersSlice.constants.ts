@@ -5,5 +5,5 @@ export const defaultActive: ActiveFilters = {
     foilOnly: false,
     isNonFoilOnly: false,
     onlineOnly: false,
-    cardCountMax: 1000,
+    cardCountMax: 5000,
 };
