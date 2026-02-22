@@ -1,24 +1,14 @@
 import {beforeEach, describe, expect, it, vi} from "vitest";
-import {fireEvent, render, screen} from "@testing-library/react";
-import {Provider} from "react-redux";
+import {fireEvent, screen} from "@testing-library/react";
 import FilterPanel from "./FilterPanel";
 import {filtersMock} from "../../mocks/filters/filtersMock";
 import {createTestStore} from "../../utils/tests/createTestWrapper";
+import renderWithProvider from "../../utils/tests/renderWithProvider";
 import {setAvailableFilters} from "../../features/filters/filtersSlice";
 
 const createStoreWithFilters = () => {
     const store = createTestStore();
     store.dispatch(setAvailableFilters(filtersMock));
-    return store;
-};
-
-const renderFilterPanel = () => {
-    const store = createStoreWithFilters();
-    render(
-        <Provider store={store}>
-            <FilterPanel/>
-        </Provider>
-    );
     return store;
 };
 
@@ -28,14 +18,12 @@ describe("FilterPanel", () => {
     });
 
     it("should render the filters title", () => {
-        renderFilterPanel();
-
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByText("Filters")).toBeInTheDocument();
     });
 
     it("should render all filters from the mock", () => {
-        renderFilterPanel();
-
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByLabelText("Search by name")).toBeInTheDocument();
         expect(screen.getByLabelText("Foil only")).toBeInTheDocument();
         expect(screen.getByLabelText("Online only")).toBeInTheDocument();
@@ -43,25 +31,22 @@ describe("FilterPanel", () => {
     });
 
     it("should render the reset button", () => {
-        renderFilterPanel();
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByRole("button", {name: "Reset filters"})).toBeInTheDocument();
     });
 
     it("should render the close button", () => {
-        renderFilterPanel();
-
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByRole("button", {name: "Close filters panel"})).toBeInTheDocument();
     });
 
     it("should render a text input for name filter", () => {
-        renderFilterPanel();
-
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByRole("textbox")).toBeInTheDocument();
-        expect(screen.getByLabelText("Search by name")).toBeInTheDocument();
     });
 
     it("should render checkboxes for boolean filters", () => {
-        renderFilterPanel();
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         const checkboxes = screen.getAllByRole("checkbox");
 
         expect(checkboxes.length).toBe(3);
@@ -71,14 +56,13 @@ describe("FilterPanel", () => {
     });
 
     it("should render a range input for cardCountMax filter", () => {
-        renderFilterPanel();
-
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         expect(screen.getByRole("slider")).toBeInTheDocument();
         expect(screen.getByText("Number of cards")).toBeInTheDocument();
     });
 
     it("should update the text input when typing", () => {
-        renderFilterPanel();
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         const input = screen.getByRole("textbox");
         fireEvent.change(input, {target: {value: "Theros"}});
 
@@ -86,10 +70,14 @@ describe("FilterPanel", () => {
     });
 
     it("should toggle the foilOnly checkbox", () => {
-        renderFilterPanel();
+        renderWithProvider(<FilterPanel/>, createStoreWithFilters());
         const checkboxes = screen.getAllByRole("checkbox");
         fireEvent.click(checkboxes[0]);
 
         expect(checkboxes[0]).toBeChecked();
+
+        fireEvent.click(checkboxes[0]);
+
+        expect(checkboxes[0]).not.toBeChecked();
     });
 });

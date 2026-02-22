@@ -3,20 +3,13 @@ import {createSlice} from "@reduxjs/toolkit";
 import type {ActiveFilters, AvailableFilter} from "../../types/Filters.ts";
 import {loadFromStorage, removeFromStorage, saveToStorage} from "../../utils/localStorage/localStorage.ts";
 import {STORAGE_KEYS} from "../../utils/localStorage/storageKeys.ts";
+import {defaultActive} from "./filtersSlice.constants.ts";
 
 interface FiltersState {
     available: AvailableFilter[];
     active: ActiveFilters;
     isPanelOpen: boolean;
 }
-
-const defaultActive: ActiveFilters = {
-    name: "",
-    foilOnly: false,
-    isNonFoilOnly: false,
-    onlineOnly: false,
-    cardCountMax: 1000,
-};
 
 export const initialState: FiltersState = {
     available: [],

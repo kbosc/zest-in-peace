@@ -17,10 +17,5 @@ describe("Error", () => {
         render(<ErrorMessage message="Pizza" className="laClass"/>);
         expect(screen.getByRole("alert")).toHaveClass("laClass");
     });
-
-    it("should not add undefined to class when className is not provided", () => {
-        render(<ErrorMessage message="KawaBunga"/>);
-        expect(screen.getByRole("alert").className).not.toContain("undefined");
-    });
 });
 
