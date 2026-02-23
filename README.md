@@ -1,5 +1,7 @@
 # 🎴 Zest in Peace — Test Technique
 
+ **[Live Demo](https://kbosc.github.io/zest-in-peace/)**
+
 Application de filtrage de sets Magic: The Gathering, construite à partir de l'API [MTGJson](https://mtgjson.com/).
 
 ---
@@ -27,7 +29,7 @@ J'ai envisagé d'ajouter les **query params dans l'URL** pour permettre de parta
 
 ### Évolutivité des filtres
 
-Le système est piloté par le JSON — ajouter un filtre dans `filters.json` met à jour l'affichage automatiquement. En revanche, brancher ce filtre sur le store nécessite encore 3 modifications manuelles :
+Le système est piloté par le JSON — ajouter un filtre dans `filters.json` met à jour l'affichage automatiquement. En revanche, pour respecter les délais de l'exercice, le branchement de ce filtre sur le store nécessite pour le moment un impact sur le code :
 
 1. `src/types/Filters.ts` → `ActiveFilters`
 2. `src/utils/localStorage/storageKeys.ts` → `STORAGE_KEYS`
@@ -53,6 +55,12 @@ Palette vérifiée avec la [matrice de contraste accessible](https://toolness.gi
 
 ---
 
+## Pipeline & déploiement
+
+Un pipeline minimaliste a été mis en œuvre pour profiter de l'hébergement GitHub Pages : à chaque commit sur la branche `main`, le projet est compilé puis déployé automatiquement.
+
+---
+
 ## Tests
 
 **164 tests** sur 23 fichiers — coverage global **~95%** (statements, functions, lines).
@@ -62,6 +70,8 @@ J'aurais aimé ajouter des tests E2E avec Cypress pour couvrir le parcours compl
 ---
 
 ## Bilan
+
+Les commits ont été faits de façon incrémentale pour que l'avancement soit révisable à chaque étape. Les tests unitaires ont été mis en place au fil de l'eau, en même temps que les fonctionnalités.
 
 Ce projet m'a permis de progresser sur TypeScript, que je pratique encore peu. J'ai utilisé un assistant IA pour l'autocomplétion, en vérifiant systématiquement les suggestions avec la documentation officielle.
 
